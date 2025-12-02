@@ -2,6 +2,7 @@ package day2
 
 import (
 	"fmt"
+	"iter"
 	"strconv"
 	"strings"
 )
@@ -55,13 +56,28 @@ func sumOfInvalidInRange(start, end int64, isInvalid func(value int64) bool) int
 	return res
 }
 
+type Range struct {
+	start int64
+	end   int64
+}
+
+func ranges(input string) iter.Seq[Range] {
+	return func(yield func(Range) bool) {
+		for r := range strings.SplitSeq(input, ",") {
+			row := strings.Split(r, "-")
+			start, _ := strconv.ParseInt(row[0], 10, 64)
+			end, _ := strconv.ParseInt(row[1], 10, 64)
+			if !yield(Range{start, end}) {
+				return
+			}
+		}
+	}
+}
+
 func loopAndSum(input string, isInvalid func(value int64) bool) int64 {
 	var sum int64 = 0
-	for r := range strings.SplitSeq(input, ",") {
-		row := strings.Split(r, "-")
-		start, _ := strconv.ParseInt(row[0], 10, 64)
-		end, _ := strconv.ParseInt(row[1], 10, 64)
-		sum += sumOfInvalidInRange(start, end, isInvalid)
+	for r := range ranges(input) {
+		sum += sumOfInvalidInRange(r.start, r.end, isInvalid)
 	}
 	return sum
 }

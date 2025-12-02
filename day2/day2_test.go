@@ -138,3 +138,29 @@ func TestPart1(t *testing.T) {
 		t.Errorf("result is not right for the sample input, got %d, want %d", res, expected)
 	}
 }
+
+func TestRanges(t *testing.T) {
+	table := []struct {
+		input string
+		res   []Range
+	}{
+		{"1-2", []Range{{1, 2}}},
+		{"1-2,4-6", []Range{{1, 2}, {4, 6}}},
+	}
+
+	for _, testCase := range table {
+		res := []Range{}
+		for r := range ranges(testCase.input) {
+			res = append(res, r)
+		}
+		if len(res) != len(testCase.res) {
+			t.Errorf("want len %d, got %d", len(testCase.res), len(res))
+		}
+		for i, v := range res {
+			if v.start != testCase.res[i].start || v.end != testCase.res[i].end {
+				t.Errorf("want %v, got %v", testCase.res[i], v)
+				continue
+			}
+		}
+	}
+}
