@@ -12,17 +12,13 @@ func TestIsInvalidPart1(t *testing.T) {
 		{55, true},
 		{6464, true},
 		{123123, true},
+		{121212, false},
 		{32, false},
 		{101, false},
 		{321123, false},
 	}
 
-	for _, test := range tests {
-		res := isInvalidPart1(test.val)
-		if res != test.expected {
-			t.Errorf("Expected %t, but got %t, for value %d", test.expected, res, test.val)
-		}
-	}
+	testIsInvalid(t, tests, isInvalidPart1)
 }
 
 func TestIsInvalidPart2(t *testing.T) {
@@ -35,6 +31,7 @@ func TestIsInvalidPart2(t *testing.T) {
 		{666, true},
 		{676, false},
 		{667, false},
+		{121212, true},
 		{6666, true},
 		{6767, true},
 		{55, true},
@@ -56,8 +53,17 @@ func TestIsInvalidPart2(t *testing.T) {
 		{2121212124, false},
 	}
 
+	testIsInvalid(t, tests, isInvalidPart2)
+}
+
+func testIsInvalid(t *testing.T, tests []struct {
+	val      int64
+	expected bool
+}, isInvalid func(int64) bool) {
+	t.Helper()
+
 	for _, test := range tests {
-		res := isInvalidPart2(test.val)
+		res := isInvalid(test.val)
 		if res != test.expected {
 			t.Errorf("Expected %t, but got %t, for value %d", test.expected, res, test.val)
 		}
