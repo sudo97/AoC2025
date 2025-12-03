@@ -71,8 +71,8 @@ func TestCalcSum(t *testing.T) {
 		{8, 1, 8, 1, 8, 1, 9, 1, 1, 1, 1, 2, 1, 1, 1},
 	}
 
-	if calcSum(test, 2) != 357 {
-		t.Errorf("expected 357, got %d", calcSum(test, 2))
+	if p1, _ := calcSum(test); p1 != 357 {
+		t.Errorf("expected 357, got %d", p1)
 	}
 }
 
@@ -110,4 +110,16 @@ func TestReadAndParseLines(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected no errors")
 	}
+}
+
+func Example() {
+	input := `987654321111111
+811111111111119
+234234234234278
+818181911112111`
+
+	Solution(strings.NewReader(input))
+	// Output:
+	// part1: 357
+	// part2: 3121910778619
 }

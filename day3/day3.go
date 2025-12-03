@@ -76,12 +76,14 @@ func ReadAndParseLines(reader io.Reader) ([][]int, error) {
 	return allLines, nil
 }
 
-func calcSum(allLines [][]int, numDigits int) int64 {
-	var sum int64 = 0
+func calcSum(allLines [][]int) (int64, int64) {
+	var sum1 int64 = 0
+	var sum2 int64 = 0
 	for _, v := range allLines {
-		sum += Joltage(v, numDigits)
+		sum1 += Joltage(v, 2)
+		sum2 += Joltage(v, 12)
 	}
-	return sum
+	return sum1, sum2
 }
 
 func Solution(reader io.Reader) {
@@ -89,6 +91,6 @@ func Solution(reader io.Reader) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("part1: %d\n", calcSum(allLines, 2))
-	fmt.Printf("part2: %d\n", calcSum(allLines, 12))
+	p1, p2 := calcSum(allLines)
+	fmt.Printf("part1: %d\npart2: %d\n", p1, p2)
 }
