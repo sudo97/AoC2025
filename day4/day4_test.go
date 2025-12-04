@@ -86,3 +86,14 @@ func TestPart1Sample(t *testing.T) {
 		t.Errorf("Expected %d, got=%d", expected, part1(r))
 	}
 }
+
+func TestPart2Sample(t *testing.T) {
+	simplerSample := sample
+	r := parse(strings.NewReader(simplerSample))
+
+	expected := 43
+
+	if part2(r) != expected {
+		t.Errorf("Expected %d, got=%d", expected, part2(r))
+	}
+}

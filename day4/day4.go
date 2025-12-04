@@ -67,7 +67,38 @@ func part1(matrix [][]bool) int {
 	return count
 }
 
+func part2(matrix [][]bool) int {
+	count := 0
+
+	for {
+		itemsToDelete := []struct {
+			i int
+			j int
+		}{}
+		for i, row := range matrix {
+			for j, c := range row {
+				if c && HasLessThanFourNeighbors(matrix, i, j) {
+					count++
+					itemsToDelete = append(itemsToDelete, struct {
+						i int
+						j int
+					}{i, j})
+				}
+			}
+		}
+		if len(itemsToDelete) == 0 {
+			break
+		}
+		for _, item := range itemsToDelete {
+			matrix[item.i][item.j] = false
+		}
+	}
+
+	return count
+}
+
 func Solution(r io.Reader) {
 	data := parse(r)
 	fmt.Printf("day4, part1: %d\n", part1(data))
+	fmt.Printf("day4, part2: %d\n", part2(data))
 }
