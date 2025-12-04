@@ -71,18 +71,12 @@ func part2(matrix [][]bool) int {
 	count := 0
 
 	for {
-		itemsToDelete := []struct {
-			i int
-			j int
-		}{}
+		itemsToDelete := [][2]int{}
 		for i, row := range matrix {
 			for j, c := range row {
 				if c && HasLessThanFourNeighbors(matrix, i, j) {
 					count++
-					itemsToDelete = append(itemsToDelete, struct {
-						i int
-						j int
-					}{i, j})
+					itemsToDelete = append(itemsToDelete, [2]int{i, j})
 				}
 			}
 		}
@@ -90,7 +84,7 @@ func part2(matrix [][]bool) int {
 			break
 		}
 		for _, item := range itemsToDelete {
-			matrix[item.i][item.j] = false
+			matrix[item[0]][item[1]] = false
 		}
 	}
 
