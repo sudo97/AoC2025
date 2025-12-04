@@ -53,36 +53,31 @@ func parse(r io.Reader) [][]bool {
 	return result
 }
 
-func part1(matrix [][]bool) int {
-	count := 0
-
+func itemsToDelete(matrix [][]bool) [][2]int {
+	itemsToDelete := [][2]int{}
 	for i, row := range matrix {
 		for j, c := range row {
 			if c && HasLessThanFourNeighbors(matrix, i, j) {
-				count++
+				itemsToDelete = append(itemsToDelete, [2]int{i, j})
 			}
 		}
 	}
+	return itemsToDelete
+}
 
-	return count
+func part1(matrix [][]bool) int {
+	return len(itemsToDelete(matrix))
 }
 
 func part2(matrix [][]bool) int {
 	count := 0
 
 	for {
-		itemsToDelete := [][2]int{}
-		for i, row := range matrix {
-			for j, c := range row {
-				if c && HasLessThanFourNeighbors(matrix, i, j) {
-					count++
-					itemsToDelete = append(itemsToDelete, [2]int{i, j})
-				}
-			}
-		}
+		itemsToDelete := itemsToDelete(matrix)
 		if len(itemsToDelete) == 0 {
 			break
 		}
+		count += len(itemsToDelete)
 		for _, item := range itemsToDelete {
 			matrix[item[0]][item[1]] = false
 		}

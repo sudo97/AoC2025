@@ -97,3 +97,13 @@ func TestPart2Sample(t *testing.T) {
 		t.Errorf("Expected %d, got=%d", expected, part2(r))
 	}
 }
+
+func Example() {
+	simplerSample := sample
+	r := strings.NewReader(simplerSample)
+
+	Solution(r)
+	// Output:
+	// day4, part1: 13
+	// day4, part2: 43
+}
