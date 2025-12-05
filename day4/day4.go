@@ -37,9 +37,9 @@ func parse(r io.Reader) [][]bool {
 	scanner := bufio.NewScanner(r)
 
 	result := [][]bool{}
-	lineNumber := 0
+	// lineNumber := 0
 	for scanner.Scan() {
-		lineNumber++
+		// lineNumber++
 		line := scanner.Text()
 		row := make([]bool, len(line))
 		for i, c := range line {

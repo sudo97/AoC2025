@@ -57,27 +57,32 @@ func sumOfInvalidInRange(start, end int64, isInvalid func(value int64) bool) int
 }
 
 type Range struct {
-	start int64
-	end   int64
+	Start int64
+	End   int64
 }
 
 func ranges(input string) iter.Seq[Range] {
 	return func(yield func(Range) bool) {
 		for r := range strings.SplitSeq(input, ",") {
-			row := strings.Split(r, "-")
-			start, _ := strconv.ParseInt(row[0], 10, 64)
-			end, _ := strconv.ParseInt(row[1], 10, 64)
-			if !yield(Range{start, end}) {
+			rng := ParseRange(r)
+			if !yield(rng) {
 				return
 			}
 		}
 	}
 }
 
+func ParseRange(r string) Range {
+	row := strings.Split(r, "-")
+	start, _ := strconv.ParseInt(row[0], 10, 64)
+	end, _ := strconv.ParseInt(row[1], 10, 64)
+	return Range{start, end}
+}
+
 func loopAndSum(input string, isInvalid func(value int64) bool) int64 {
 	var sum int64 = 0
 	for r := range ranges(input) {
-		sum += sumOfInvalidInRange(r.start, r.end, isInvalid)
+		sum += sumOfInvalidInRange(r.Start, r.End, isInvalid)
 	}
 	return sum
 }

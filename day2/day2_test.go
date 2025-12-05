@@ -157,7 +157,7 @@ func TestRanges(t *testing.T) {
 			t.Errorf("want len %d, got %d", len(testCase.res), len(res))
 		}
 		for i, v := range res {
-			if v.start != testCase.res[i].start || v.end != testCase.res[i].end {
+			if v.Start != testCase.res[i].Start || v.End != testCase.res[i].End {
 				t.Errorf("want %v, got %v", testCase.res[i], v)
 				continue
 			}
