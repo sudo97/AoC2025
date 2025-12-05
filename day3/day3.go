@@ -59,11 +59,6 @@ func ReadAndParseLines(reader io.Reader) ([][]int, error) {
 		lineNumber++
 		line := scanner.Text()
 
-		// Skip empty lines
-		if len(line) == 0 {
-			continue
-		}
-
 		parsedLine := ParseLine(line)
 
 		allLines = append(allLines, parsedLine)
