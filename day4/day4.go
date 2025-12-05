@@ -6,26 +6,28 @@ import (
 	"io"
 )
 
+var arr = [8]struct {
+	x int
+	y int
+}{
+	{-1, -1}, {-1, 0}, {-1, +1},
+	{0, -1}, {0, 1},
+	{1, -1}, {+1, 0}, {1, 1},
+}
+
 func HasLessThanFourNeighbors(matrix [][]bool, i, j int) bool {
 	count := 0
 
-	arr := [8]struct {
-		x int
-		y int
-	}{
-		{i - 1, j - 1}, {i - 1, j}, {i - 1, j + 1},
-		{i, j - 1}, {i, j + 1},
-		{i + 1, j - 1}, {i + 1, j}, {i + 1, j + 1},
-	}
-
 	for _, v := range arr {
-		if v.x < 0 || v.x >= len(matrix) {
+		x := i + v.x
+		y := j + v.y
+		if x < 0 || x >= len(matrix) {
 			continue
 		}
-		if v.y < 0 || v.y >= len(matrix[v.x]) {
+		if y < 0 || y >= len(matrix[x]) {
 			continue
 		}
-		if matrix[v.x][v.y] {
+		if matrix[x][y] {
 			count++
 		}
 	}
