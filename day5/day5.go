@@ -77,7 +77,7 @@ func part1(input PuzzleInput) int {
 }
 
 func isOverlapping(a, b *day2.Range) bool {
-	return isInRange(a.Start, b) || isInRange(a.End, b) || isInRange(b.End, a) || isInRange(b.Start, a)
+	return isInRange(a.Start, b) || isInRange(a.End, b)
 }
 
 func mergeOverlapping(a, b *day2.Range) day2.Range {
