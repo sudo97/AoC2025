@@ -24,6 +24,15 @@ func TestParting(t *testing.T) {
 			t.Errorf("Should parse as %d for the input: %s, instead got %d", testCase.expectedResult.num, testCase.input, line.num)
 		}
 	}
+
+	_, err := parseLine("U123")
+	if err == nil {
+		t.Errorf("Should return error when direction is unknown")
+	}
+	_, err = parseLine("RABC")
+	if err == nil {
+		t.Errorf("Should return error when number of turns is not a number")
+	}
 }
 
 func TestPart1(t *testing.T) {
@@ -66,4 +75,21 @@ L82`
 	if res != expected {
 		t.Errorf("expected %d, but got %d", expected, res)
 	}
+}
+
+func Example() {
+	sample := `L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82`
+	Solution(sample)
+	// Output:
+	// day 1, part 1 is 3
+	// day 1, part 2 is 6
 }
