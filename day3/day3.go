@@ -54,9 +54,7 @@ func ReadAndParseLines(reader io.Reader) ([][]int, error) {
 	scanner := bufio.NewScanner(reader)
 	var allLines [][]int
 
-	lineNumber := 0
 	for scanner.Scan() {
-		lineNumber++
 		line := scanner.Text()
 
 		parsedLine := ParseLine(line)
