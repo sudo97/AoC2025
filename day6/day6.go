@@ -67,7 +67,46 @@ func Solution(s string) {
 	fmt.Printf("day6, part1: %d\n", part1(puzzleInput))
 
 	transposed, _ := transpose(s)
-	fmt.Printf("%s\n", transposed)
+	fmt.Printf("day6, part2: %d\n", part2(transposed))
+}
+
+func part2(s string) int {
+	grandTotal := 0
+
+	buf := make([]int, 0, 4)
+
+	for l := range strings.SplitSeq(s, "\n") {
+		trimmed := strings.TrimSpace(l[0:4])
+		if trimmed == "" {
+			continue
+		}
+		num, e := strconv.Atoi(strings.TrimSpace(l[0:4]))
+		if e != nil {
+			panic(e)
+		}
+		buf = append(buf, num)
+
+		op := l[4:]
+
+		switch op {
+		case "*":
+			res := 1
+			for _, v := range buf {
+				res = res * v
+			}
+			grandTotal += res
+			buf = make([]int, 0, 4)
+		case "+":
+			res := 0
+			for _, v := range buf {
+				res += v
+			}
+			grandTotal += res
+			buf = make([]int, 0, 4)
+		}
+	}
+
+	return grandTotal
 }
 
 func part1(puzzleInput *PuzzleInput) int {
