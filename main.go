@@ -8,6 +8,7 @@ import (
 	"sudo97/AoC2025/day3"
 	"sudo97/AoC2025/day4"
 	"sudo97/AoC2025/day5"
+	"sudo97/AoC2025/day6"
 )
 
 func main() {
@@ -60,5 +61,13 @@ func main() {
 			return
 		}
 		day5.Solution(file)
+	case "day6":
+		file, err := os.Open(fmt.Sprintf("%s.in", day))
+		defer file.Close()
+		if err != nil {
+			fmt.Printf("%s", err)
+			return
+		}
+		day6.Solution(file)
 	}
 }
