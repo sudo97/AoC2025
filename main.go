@@ -62,12 +62,11 @@ func main() {
 		}
 		day5.Solution(file)
 	case "day6":
-		file, err := os.Open(fmt.Sprintf("%s.in", day))
-		defer file.Close()
+		data, err := os.ReadFile(fmt.Sprintf("%s.in", day))
 		if err != nil {
 			fmt.Printf("%s", err)
 			return
 		}
-		day6.Solution(file)
+		day6.Solution(string(data))
 	}
 }

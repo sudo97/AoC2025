@@ -62,9 +62,12 @@ func parse(reader io.Reader) *PuzzleInput {
 	panic("No ops")
 }
 
-func Solution(reader io.Reader) {
-	puzzleInput := parse(reader)
+func Solution(s string) {
+	puzzleInput := parse(strings.NewReader(s))
 	fmt.Printf("day6, part1: %d\n", part1(puzzleInput))
+
+	transposed, _ := transpose(s)
+	fmt.Printf("%s\n", transposed)
 }
 
 func part1(puzzleInput *PuzzleInput) int {
@@ -85,4 +88,46 @@ func part1(puzzleInput *PuzzleInput) int {
 		}
 	}
 	return count
+}
+
+func transpose(s string) (string, error) {
+	lines := strings.Split(s, "\n")
+	linesAsRunes := make([][]rune, len(lines))
+
+	for i, l := range lines {
+		linesAsRunes[i] = []rune(l)
+	}
+
+	if !allLengthEqual(linesAsRunes) {
+		return "", fmt.Errorf("input is not an equal length rows")
+	}
+
+	result := []rune("")
+
+	for i := len(linesAsRunes[0]) - 1; i >= 0; i-- {
+		for j := 0; j < len(linesAsRunes); j++ {
+			c := linesAsRunes[j][i]
+			result = append(result, c)
+		}
+
+		if i > 0 {
+			result = append(result, '\n')
+		}
+	}
+
+	return string(result), nil
+}
+
+func allLengthEqual[T any](matrix [][]T) bool {
+	if len(matrix) == 0 {
+		return true
+	}
+	lastLen := len(matrix[0])
+	for _, row := range matrix {
+		if lastLen != len(row) {
+			return false
+		}
+		lastLen = len(row)
+	}
+	return true
 }

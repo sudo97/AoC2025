@@ -84,8 +84,27 @@ func Example() {
   6 98  215 314
 *   +   *   +  `
 
-	Solution(strings.NewReader(sample))
+	Solution(sample)
 
 	// Output:
 	// day6, part1: 4277556
+}
+
+func TestTranspose(t *testing.T) {
+	table := []struct {
+		input  string
+		output string
+	}{
+		{"a", "a"},
+		{"ab", "b\na"},
+		{"ab\ncd", "bd\nac"},
+		{"abc\ndef\nghi", "cfi\nbeh\nadg"},
+	}
+
+	for _, v := range table {
+		res, _ := transpose(v.input)
+		if res != v.output {
+			t.Errorf("got\n===\n%s\n===\nwant\n===\n%s\n===", res, v.output)
+		}
+	}
 }
