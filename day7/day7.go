@@ -115,7 +115,6 @@ func part2Step(arr []int, splitters []int) []int {
 		if v != 0 {
 			if slices.Contains(splitters, sp) {
 				newArr[sp-1] += v
-
 				newArr[sp+1] += v
 			} else {
 				newArr[sp] += v
