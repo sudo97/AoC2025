@@ -31,7 +31,7 @@ func split(beams []int, splitters []int) ([]int, int) {
 }
 
 func Solution(reader io.Reader) {
-	fmt.Printf("day7, mart1: %d\n", part1(reader))
+	fmt.Printf("day7, part1: %d\n", part1(reader))
 }
 
 func part1(r io.Reader) int {
