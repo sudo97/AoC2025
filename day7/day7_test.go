@@ -80,7 +80,7 @@ func TestStepTrace(t *testing.T) {
 	}
 
 	for _, tst := range table {
-		got, _ := part2Step(tst.arr, tst.sp)
+		got := part2Step(tst.arr, tst.sp)
 
 		if !slices.Equal(got, tst.want) {
 			splitters := make([]int, len(got))

@@ -8,22 +8,18 @@ import (
 
 func Solution(reader io.Reader) {
 	beams, splitters, width := parseInput(reader)
-	fmt.Printf("day7, part1: %d\n", part1(beams, splitters, width))
+	fmt.Printf("day7, part1: %d\n", part1(beams, splitters))
 	fmt.Printf("day7, part2: %d\n", part2(beams, splitters, width))
 }
 
-func part1(beams []int, splitters [][]int, width int) int {
-	arr := make([]int, width)
-	for _, beam := range beams {
-		arr[beam]++
-	}
+func part1(beams []int, splitters [][]int) int {
 	count := 0
 
 	for _, sp := range splitters {
-		newBeams, splits := part2Step(arr, sp)
+		newBeams, splits := part1Step(beams, sp)
 
 		count += splits
-		arr = newBeams
+		beams = newBeams
 	}
 
 	return count
@@ -37,7 +33,7 @@ func part2(beams []int, splitters [][]int, width int) int {
 	}
 
 	for _, sp := range splitters {
-		arr, _ = part2Step(arr, sp)
+		arr = part2Step(arr, sp)
 	}
 
 	sum := 0
@@ -47,9 +43,8 @@ func part2(beams []int, splitters [][]int, width int) int {
 	return sum
 }
 
-func part2Step(arr []int, splitters []int) ([]int, int) {
+func part2Step(arr []int, splitters []int) []int {
 	newArr := make([]int, len(arr))
-	count := 0
 
 	for sp, v := range arr {
 		if slices.Contains(splitters, sp) {
@@ -59,5 +54,28 @@ func part2Step(arr []int, splitters []int) ([]int, int) {
 			newArr[sp] += v
 		}
 	}
-	return newArr, count
+	return newArr
+}
+
+func part1Step(beams []int, splitters []int) ([]int, int) {
+	res := make([]int, 0, len(beams))
+	numSplits := 0
+
+	for _, beam := range beams {
+		if slices.Contains(splitters, beam) {
+			numSplits += 1
+			if !slices.Contains(res, beam-1) {
+				res = append(res, beam-1)
+			}
+			if !slices.Contains(res, beam+1) {
+				res = append(res, beam+1)
+			}
+		} else {
+			if !slices.Contains(res, beam) {
+				res = append(res, beam)
+			}
+		}
+	}
+
+	return res, numSplits
 }
