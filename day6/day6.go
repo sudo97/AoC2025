@@ -80,13 +80,10 @@ func part2(s string) int {
 		if trimmed == "" {
 			continue
 		}
-		num, e := strconv.Atoi(strings.TrimSpace(l[0:4]))
-		if e != nil {
-			panic(e)
-		}
+		num, _ := strconv.Atoi(strings.TrimSpace(l[0 : len(l)-1]))
 		buf = append(buf, num)
 
-		op := l[4:]
+		op := l[len(l)-1:]
 
 		switch op {
 		case "*":

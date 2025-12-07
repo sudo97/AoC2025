@@ -86,9 +86,6 @@ func Example() {
 
 	Solution(sample)
 
-	// TODO: full input has 4 rows of numbers, sample has 3.
-	// I solved the puzzle, but this test fails
-
 	// Output:
 	// day6, part1: 4277556
 	// day6, part2: 3263827
