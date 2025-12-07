@@ -21,7 +21,7 @@ func main() {
 
 	switch day {
 	case "day1":
-		data, err := os.ReadFile(fmt.Sprintf("%s.in", day))
+		data, err := os.ReadFile(fmt.Sprintf("inputs/%s.in", day))
 
 		if err != nil {
 			fmt.Printf("%s", err)
@@ -30,7 +30,7 @@ func main() {
 
 		day1.Solution(string(data))
 	case "day2":
-		data, err := os.ReadFile(fmt.Sprintf("%s.in", day))
+		data, err := os.ReadFile(fmt.Sprintf("inputs/%s.in", day))
 
 		if err != nil {
 			fmt.Printf("%s", err)
@@ -39,7 +39,7 @@ func main() {
 
 		day2.Solution(string(data))
 	case "day3":
-		file, err := os.Open(fmt.Sprintf("%s.in", day))
+		file, err := os.Open(fmt.Sprintf("inputs/%s.in", day))
 		defer file.Close()
 		if err != nil {
 			fmt.Printf("%s", err)
@@ -47,7 +47,7 @@ func main() {
 		}
 		day3.Solution(file)
 	case "day4":
-		file, err := os.Open(fmt.Sprintf("%s.in", day))
+		file, err := os.Open(fmt.Sprintf("inputs/%s.in", day))
 		defer file.Close()
 		if err != nil {
 			fmt.Printf("%s", err)
@@ -55,7 +55,7 @@ func main() {
 		}
 		day4.Solution(file)
 	case "day5":
-		file, err := os.Open(fmt.Sprintf("%s.in", day))
+		file, err := os.Open(fmt.Sprintf("inputs/%s.in", day))
 		defer file.Close()
 		if err != nil {
 			fmt.Printf("%s", err)
@@ -63,14 +63,14 @@ func main() {
 		}
 		day5.Solution(file)
 	case "day6":
-		data, err := os.ReadFile(fmt.Sprintf("%s.in", day))
+		data, err := os.ReadFile(fmt.Sprintf("inputs/%s.in", day))
 		if err != nil {
 			fmt.Printf("%s", err)
 			return
 		}
 		day6.Solution(string(data))
 	case "day7":
-		file, err := os.Open(fmt.Sprintf("%s.in", day))
+		file, err := os.Open(fmt.Sprintf("inputs/%s.in", day))
 		defer file.Close()
 		if err != nil {
 			fmt.Printf("%s", err)
