@@ -112,13 +112,11 @@ func part2Step(arr []int, splitters []int) []int {
 	newArr := make([]int, len(arr))
 
 	for sp, v := range arr {
-		if v != 0 {
-			if slices.Contains(splitters, sp) {
-				newArr[sp-1] += v
-				newArr[sp+1] += v
-			} else {
-				newArr[sp] += v
-			}
+		if slices.Contains(splitters, sp) {
+			newArr[sp-1] += v
+			newArr[sp+1] += v
+		} else {
+			newArr[sp] += v
 		}
 	}
 	return newArr
