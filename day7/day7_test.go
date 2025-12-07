@@ -28,6 +28,7 @@ func Example() {
 
 	// Output:
 	// day7, part1: 21
+	// day7, part2: 40
 }
 
 func TestSplit(t *testing.T) {
@@ -106,5 +107,18 @@ func TestParseSplitterLine(t *testing.T) {
 		if !slices.Equal(res, tst.output) {
 			t.Errorf("got %v, want %v", res, tst.output)
 		}
+	}
+}
+
+func TestParseInput(t *testing.T) {
+	inp := `..S..
+..^..`
+	exp := []int{2}
+	beams, splitters := parseInput(strings.NewReader(inp))
+	if !slices.Equal(beams, exp) {
+		t.Errorf("want %v, got %v", exp, beams)
+	}
+	if !slices.EqualFunc(splitters, [][]int{exp}, func(s1 []int, s2 []int) bool { return slices.Equal(s1, s2) }) {
+		t.Errorf("want %v, got %v", exp, splitters)
 	}
 }

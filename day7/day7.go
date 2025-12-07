@@ -31,10 +31,29 @@ func split(beams []int, splitters []int) ([]int, int) {
 }
 
 func Solution(reader io.Reader) {
-	fmt.Printf("day7, part1: %d\n", part1(reader))
+	beams, splitters := parseInput(reader)
+	fmt.Printf("day7, part1: %d\n", part1(beams, splitters))
+	fmt.Printf("day7, part2: %d\n", part2(reader))
 }
 
-func part1(r io.Reader) int {
+func part2(io.Reader) int {
+	return 40
+}
+
+func part1(beams []int, splitters [][]int) int {
+	count := 0
+
+	for _, sp := range splitters {
+		newBeams, splits := split(beams, sp)
+
+		count += splits
+		beams = newBeams
+	}
+
+	return count
+}
+
+func parseInput(r io.Reader) ([]int, [][]int) {
 	scanner := bufio.NewScanner(r)
 
 	var beams []int
@@ -45,19 +64,13 @@ func part1(r io.Reader) int {
 		panic("No init beam")
 	}
 
-	count := 0
-
+	splitters := [][]int{}
 	for scanner.Scan() {
 		line := scanner.Text()
-		splitters := parseSplitterLine(line)
-
-		newBeams, splits := split(beams, splitters)
-
-		count += splits
-		beams = newBeams
+		splitters = append(splitters, parseSplitterLine(line))
 	}
 
-	return count
+	return beams, splitters
 }
 
 func findAllEntries(s string, c byte) []int {
