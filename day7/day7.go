@@ -70,10 +70,8 @@ func part1Step(beams []int, splitters []int) ([]int, int) {
 			if !slices.Contains(res, beam+1) {
 				res = append(res, beam+1)
 			}
-		} else {
-			if !slices.Contains(res, beam) {
-				res = append(res, beam)
-			}
+		} else if !slices.Contains(res, beam) {
+			res = append(res, beam)
 		}
 	}
 
